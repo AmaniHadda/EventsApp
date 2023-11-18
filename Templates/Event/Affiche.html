@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="post" action="{% url 'search' %}" enctype="multipart/form-data" >
+    {% csrf_token %}
+    <input type="text"  name="title" />
+<input type="submit" value="Search">
+</form>
+<table border=1>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Image</th>
+        <th>Category</th>
+        <th>Etat</th>
+        <th>Nbe Participante</th>
+        <th>Detail</th>
+        <th>DetailGeneric</th>
+        <th>Participate</th>
+        <th>Cancel</th>
+    </tr>
+    {% for e in ee%}
+    <tr>
+        <td>{{e.title}}</td>
+        <td>{{e.description}}</td>
+        <td>{{e.image}}</td>
+        <td>{{e.category}}</td>
+        <td>{{e.state}}</td>
+        <td>{{e.nbe_participant}}
+        <td><a href="{% url 'D' e.title %}">Detail</a></td>
+        <td><a href="{% url 'DD' e.id %}">Detail Generic</a></td>
+        <td><a href="{% url 'Participate' event_id=e.id %}">Participate</a></td>
+        <td><a href="{% url 'Cancel' id=e.id %}">Cancel Participate</a></td>
+        <td><a href="{% url 'delete' e.id %}">Delete Event</a></td>
+        <td><a href="{% url 'deletee' e.id %}">Delete Fn</a></td>
+        <td><a href="{% url 'update' e.id %}">Update Event</a></td>
+        <td><a href="{% url 'up' e.title %}">Update Event</a></td>
+       </tr>
+    {%endfor%}
+
+</table>
+{%endblock%}
